@@ -14,7 +14,7 @@ namespace SwimApp2
         static List<string> teamB = new List<string>();
         static List<string> teamReserve = new List<string>();
 
-        static float fastestTime = 9999f;
+        static float fastestTime = 0f;
         static string topSwimmer = "";
         static void OneSwimmer()
         {
@@ -40,13 +40,11 @@ namespace SwimApp2
 
                 totalTime = (minutes * 60) + seconds;
 
-                Console.WriteLine($"Swimmer time {i+1}: {minutes}min {seconds}s\tTotal time in seconds: {totalTime}s");
+                Console.WriteLine($"Swimmer time {i + 1}: {minutes}min {seconds}s\tTotal time in seconds: {totalTime}s");
 
                 sumTotalTime += totalTime;
 
                 Console.WriteLine(sumTotalTime);
-
-
 
                 Console.ReadLine();
             }
@@ -81,15 +79,48 @@ namespace SwimApp2
                 teamReserve.Add(swimmerName);
                 allocatedTeam = "Reserve D:";
             }
-            
-            
+
+
             Console.WriteLine(allocatedTeam);
-           
-           
-            
+
         }
 
+        static string CreateTeamList()
+        {
+            //Add Team A to team list
+
+            string teamLists = "the teams are: \n\nTeam A\n";
+
+            foreach (string swimmer in teamA)
+            {
+                teamLists += swimmer + "\t";
+            }
+            teamLists += $"\n\nwith {teamB.Count} team members\n\nTeam B\n";
+
+            //Add Team B to team list
+
+            foreach (string swimmer in teamB)
+            {
+                teamLists += swimmer + "\t";
+            }
+            teamLists += $"\n\nwith {teamB.Count} team members\n\nTeam Reserve\n";
+
+            //Add Team Reserve to team list
+
+            foreach (string swimmer in teamReserve)
+            {
+                teamLists += swimmer + "\t";
+            }
+            teamLists += $"\n\nwith {teamReserve.Count} team members\n\n";
+
+            return teamLists;
+        }
+
+
+
+
         static void Main(string[] args)
+
         {
             
             string flag = "";
@@ -101,8 +132,10 @@ namespace SwimApp2
 
                 flag = Console.ReadLine();
             }
+            Console.WriteLine(CreateTeamList());
 
             Console.WriteLine($"the fastest swimmer was {topSwimmer} with an average time of {fastestTime}");
+
             Console.ReadLine();
         }
     }
